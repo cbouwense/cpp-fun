@@ -1,18 +1,20 @@
-#include "Circle.hpp"
+#include "../include/Circle.hpp"
+#include "../include/Square.hpp"
 
-int main() {
+int main()
+{
   Circle circle;
-  // Rectangle rectangle;
+  Square square;
 
-  Shape* shapePtr = nullptr;
+  Shape *shapePtr = nullptr;
 
   // Drawing a circle
   shapePtr = &circle;
   shapePtr->draw();
 
-  // Drawing a rectangle
-  // shapePtr = &rectangle;
-  // shapePtr->draw();
+  // Drawing a square
+  shapePtr = &square;
+  shapePtr->draw();
 
   return 0;
 }
