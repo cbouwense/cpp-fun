@@ -6,11 +6,15 @@
 #include "../include/Item.hpp"
 #include "../include/Sword.hpp"
 
-using namespace std;
+template <typename T>
+using U = std::unique_ptr<T>;
+
+template <typename T>
+using S = std::shared_ptr<T>;
 
 int main() {
-  std::unique_ptr<Character> character = std::make_unique<Character>();
-  std::shared_ptr<Item> item(new Sword("Sting", 10));
+  U<Character> character = std::make_unique<Character>();
+  S<Item> item(new Sword("Sting", 10));
 
   character->addItemToInventory(item);
   character->useItemFromInventory(item);
