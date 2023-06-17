@@ -2,18 +2,19 @@
 #define CHARACTER_H
 
 #include "Inventory.hpp"
+#include <memory>
 
 class Character {
 public:
-  Character(Inventory* inventory);
+  Character();
   virtual ~Character();
 
-  virtual void useItemFromInventory(Item item);
-  virtual void addItemToInventory(Item item);
-  virtual void removeItemFromInventory(Item item);
+  virtual void useItemFromInventory(std::shared_ptr<Item> item);
+  virtual void addItemToInventory(std::shared_ptr<Item> item);
+  virtual void removeItemFromInventory(std::shared_ptr<Item> item);
 
 private:
-  Inventory* inventory;
+  std::unique_ptr<Inventory> inventory;
 };
 
 #endif
