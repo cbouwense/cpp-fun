@@ -3,11 +3,9 @@
 
 #include "Shape.hpp"
 
-class Square : public Shape
-{
+class Square : public Shape {
 public:
   void draw() const override;
 };
 
 #endif
-// Path: src\Circle.cpp

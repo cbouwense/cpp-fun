@@ -3,8 +3,7 @@
 
 #include "Shape.hpp"
 
-class Circle : public Shape
-{
+class Circle : public Shape {
 public:
   void draw() const override;
 };
