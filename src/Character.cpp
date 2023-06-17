@@ -1,8 +1,7 @@
 #include <iostream>
 
-#include "../include/Circle.hpp"
+#include "../include/Character.hpp"
 
-void Circle::draw() const
-{
-  std::cout << "Drawing a circle." << std::endl;
+void Character::draw() const {
+  
 }
