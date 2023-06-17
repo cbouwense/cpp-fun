@@ -1,13 +1,13 @@
-CC = zig cc
-CXX = zig c++
+CC = g++
+CXX = g++
 CXXFLAGS = -std=c++17
 
-SRCS = src/Square.cpp src/Circle.cpp src/main.cpp
+SRCS = $(wildcard src/*.cpp)
 OBJS = $(addprefix build/objects/,$(notdir $(SRCS:.cpp=.o)))
 PDBS = $(addprefix build/pdbs/,$(notdir $(SRCS:.cpp=.pdb)))
 LIBS = $(addprefix build/libs/,libapp.a)
 
-build/app.exe: $(OBJS) $(LIBS)
+build/app: $(OBJS) $(LIBS)
 		$(CXX) $(CXXFLAGS) $(OBJS) -o $@ -Lbuild/libs -lapp
 
 build/objects/%.o: src/%.cpp | build/objects
@@ -28,5 +28,5 @@ build/pdbs:
 build/libs:
 		mkdir -p $@
 
-win_clean:
-		del /Q /F build\libs\* build\objects\* build\pdbs\* build\* *.o *.pdb *.a *.exe *.lib
+clean:
+		rm -rf build
