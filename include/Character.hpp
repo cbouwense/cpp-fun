@@ -9,6 +9,7 @@ public:
   Character();
   virtual ~Character();
 
+  virtual void sayHello();
   virtual void useItemFromInventory(std::shared_ptr<Item> item);
   virtual void addItemToInventory(std::shared_ptr<Item> item);
   virtual void removeItemFromInventory(std::shared_ptr<Item> item);

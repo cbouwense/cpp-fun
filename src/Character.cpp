@@ -8,6 +8,10 @@ Character::Character() {
 
 Character::~Character() {}
 
+void Character::sayHello() {
+  std::cout << "Hello, I am a character" << std::endl;
+}
+
 void Character::addItemToInventory(std::shared_ptr<Item> item) {
   std::cout << "Adding " << item->getName() << " to inventory" << std::endl;
   inventory->addItem(item);

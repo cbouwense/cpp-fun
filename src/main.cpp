@@ -1,16 +1,11 @@
 #include <iostream>
 #include <memory>
 
+#include "../include/Aliases.hpp"
 #include "../include/Character.hpp"
 #include "../include/Inventory.hpp"
 #include "../include/Item.hpp"
 #include "../include/Sword.hpp"
-
-template <typename T>
-using U = std::unique_ptr<T>;
-
-template <typename T>
-using S = std::shared_ptr<T>;
 
 int main() {
   U<Character> character = std::make_unique<Character>();
