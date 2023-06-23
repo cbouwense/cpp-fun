@@ -17,6 +17,8 @@ public:
 
   std::string inventoryToString();
 
+  int getItem();
+
 private:
   int m_int;
 };

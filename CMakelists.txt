@@ -12,7 +12,7 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(Catch2)
 
-add_executable(tests src/test.cpp)
+add_executable(tests src/test.cpp src/Character.cpp)
 target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
 
 add_executable(cpp-fun src/main.cpp src/Character.cpp)

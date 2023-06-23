@@ -17,3 +17,7 @@ void Character::useItemFromInventory() {
 std::string Character::inventoryToString() {
   return std::to_string(this->m_int);
 }
+
+int Character::getItem() {
+  return this->m_int;
+}
