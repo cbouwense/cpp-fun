@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "../include/Sword.hpp"
+#include "Sword.h"
 
 Sword::Sword(const std::string& name, int damage) : m_name(name), m_damage(damage) {}
 

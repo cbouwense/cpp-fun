@@ -1,18 +1,12 @@
 #include <iostream>
-#include <memory>
-
-#include "../include/Aliases.hpp"
-#include "../include/Character.hpp"
-#include "../include/Inventory.hpp"
-#include "../include/Item.hpp"
-#include "../include/Sword.hpp"
+#include "./Character.h"
 
 int main() {
-  U<Character> character = std::make_unique<Character>();
-  S<Item> item(new Sword("Sting", 10));
-
-  character->addItemToInventory(item);
-  character->useItemFromInventory(item);
-
-  return 0;
+  std::cout << "Hello, World!" << std::endl;
+    
+	Character character;
+	character.sayHello();
+  character.addItemToInventory();
+	
+	return 0;
 }
