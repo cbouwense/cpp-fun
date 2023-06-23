@@ -5,6 +5,7 @@
 
 class Item {
 public:
+  virtual Item() = default;
   virtual ~Item() = default;
 
   // TODO: How should we handle failure to use an item?

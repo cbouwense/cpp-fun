@@ -1,16 +1,9 @@
 #include <iostream>
 #include "./Character.h"
 
-Character::Character() {}
-
-Character::~Character() {}
-
-void Character::sayHello() {
-  std::cout << "Hello, I am a character" << std::endl;
-}
-
-void Character::addItemToInventory() {
+Character Character::addItemToInventory(int i) {
   std::cout << "Adding to inventory" << std::endl;
+  return Character(i);
 }
 
 void Character::removeItemFromInventory() {
@@ -19,4 +12,8 @@ void Character::removeItemFromInventory() {
 
 void Character::useItemFromInventory() {
   std::cout << "Using from inventory" << std::endl;
+}
+
+std::string Character::inventoryToString() {
+  return std::to_string(this->m_int);
 }

@@ -1,24 +1,24 @@
-//------------------------------------------------------------------------------
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
-//------------------------------------------------------------------------------
+#include <string>
+
 class Character {
-
-//------------------------------------------------------------------------------
 public:
-  Character();
+  Character(int i) : m_int(i) {}
 
-  virtual ~Character();
+  ~Character() = default;
+  
+  Character addItemToInventory(int i);
 
-  virtual void sayHello();
+  void useItemFromInventory();
   
-  virtual void useItemFromInventory();
-  
-  virtual void addItemToInventory();
-  
-  virtual void removeItemFromInventory();
+  void removeItemFromInventory();
 
+  std::string inventoryToString();
+
+private:
+  int m_int;
 };
 
 #endif
