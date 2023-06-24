@@ -1,23 +1,41 @@
 #include <iostream>
-#include "./Character.h"
+#include <string>
+#include "Character.h"
 
-Character Character::addItemToInventory(int i) {
-  std::cout << "Adding to inventory" << std::endl;
+//--------------------------------------------------------------------------------------------------
+Character::Character() : m_int(0) {}
+
+//--------------------------------------------------------------------------------------------------
+Character::Character(const int i) : m_int(i) {} 
+
+//--------------------------------------------------------------------------------------------------
+Character::~Character() {}
+
+//--------------------------------------------------------------------------------------------------
+Character Character::addItemToInventory(const int i) const {
+  if (hasItem(i)) return *this;
+
   return Character(i);
 }
 
-void Character::removeItemFromInventory() {
-  std::cout << "Removing from inventory" << std::endl;
+//--------------------------------------------------------------------------------------------------
+Character Character::removeItemFromInventory(const int i) const {
+  if (!hasItem(i)) return *this;
+
+  return Character();
 }
 
-void Character::useItemFromInventory() {
+//--------------------------------------------------------------------------------------------------
+void Character::useItemFromInventory() const {
   std::cout << "Using from inventory" << std::endl;
 }
 
-std::string Character::inventoryToString() {
-  return std::to_string(this->m_int);
+//--------------------------------------------------------------------------------------------------
+bool Character::hasItem(const int i) const {
+  return this->m_int == i;
 }
 
-int Character::getItem() {
-  return this->m_int;
+//--------------------------------------------------------------------------------------------------
+bool Character::hasNoItems() const {
+  return this->m_int == 0;
 }

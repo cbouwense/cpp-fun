@@ -5,19 +5,21 @@
 
 class Character {
 public:
-  Character(int i) : m_int(i) {}
+  Character();
 
-  ~Character() = default;
+  Character(const int i);
+
+  ~Character();
   
-  Character addItemToInventory(int i);
+  Character addItemToInventory(int i) const;
 
-  void useItemFromInventory();
-  
-  void removeItemFromInventory();
+  Character removeItemFromInventory(int i) const;
 
-  std::string inventoryToString();
+  void useItemFromInventory() const;
 
-  int getItem();
+  bool hasItem(const int i) const;
+
+  bool hasNoItems() const;
 
 private:
   int m_int;
