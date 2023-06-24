@@ -1,0 +1,11 @@
+# Gather up all the source files
+set(SOURCES
+  Character.cpp
+)
+
+# Add the different executables as targets which depend on the source files
+# add_executable(tests test.cpp ${SOURCES})
+add_executable(${PROJECT_NAME} main.cpp ${SOURCES})
+
+# Link the libraries to the executables
+target_link_libraries(${PROJECT_NAME} PRIVATE app_external_deps)

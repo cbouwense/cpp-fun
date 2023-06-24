@@ -4,43 +4,60 @@ cmake_minimum_required(VERSION "3.16.1")
 # Normal stuff
 #-------------------------------------------------------------------------------
 
-project(cpp-fun)
+set(PROJECT_NAME "cpp-fun")
 
-# Gather up all the source files
-set(SOURCES
-  src/Character.cpp
-  src/Character.h
-)
-
-# Add the different executables as targets which depend on the source files
-add_executable(tests src/test.cpp ${SOURCES})
-add_executable(main src/main.cpp ${SOURCES})
-
-#-------------------------------------------------------------------------------
-# Catch 2
-#-------------------------------------------------------------------------------
-
-Include(FetchContent)
-
-# Get Catch2 if it isn't already downloaded
-FetchContent_Declare(
-  Catch2
-  GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-  GIT_TAG        v3.0.1 # or a later release
-)
-
-FetchContent_MakeAvailable(Catch2)
+project(${PROJECT_NAME})
 
 #-------------------------------------------------------------------------------
 # SFML
 #-------------------------------------------------------------------------------
 
-find_package(SFML 2.6 COMPONENTS audio graphics window system REQUIRED)
+include(FetchContent)
 
+# set(BUILD_SHARED_LIBS OFF)
 
+FetchContent_Declare(
+ SFML
+ GIT_REPOSITORY https://github.com/SFML/SFML.git
+ GIT_TAG 2.5.1
+)
+FetchContent_MakeAvailable(SFML)
+
+#-------------------------------------------------------------------------------
+# Create the executable
+#-------------------------------------------------------------------------------
+
+# Gather up all the source files
+set(SOURCES
+  src/main.cpp
+  src/Character.cpp
+)
+
+add_executable(${PROJECT_NAME}
+  ${SOURCES}
+)
+
+target_link_libraries(${PROJECT_NAME}
+  sfml-graphics
+  sfml-window
+  sfml-system
+)
+
+#-------------------------------------------------------------------------------
+# Catch 2
+#-------------------------------------------------------------------------------
+
+# Include(FetchContent)
+
+# Get Catch2 if it isn't already downloaded
+# FetchContent_Declare(
+#   Catch2
+#   GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+#   GIT_TAG        v3.0.1 # or a later release
+# )
+
+# FetchContent_MakeAvailable(Catch2)
 
 # Link our executable to Catch2's main() function
-target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
+# target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
 
-# Link SFML
-target_link_libraries(main PRIVATE sfml-audio sfml-graphics sfml-window sfml-system)
