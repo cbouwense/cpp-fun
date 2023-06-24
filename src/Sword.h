@@ -1,15 +1,13 @@
 #ifndef SWORD_H
 #define SWORD_H
 
-#include "Item.hpp"
+#include "Item.h"
 
 class Sword : public Item {
 public:
-  Sword(const std::string& name, int damage);
-  ~Sword() = default;
-
-  void use() override;
-  const std::string getName() override;
+  void use() const override;
+  
+  const std::string getName() const override;
 
 private:
   int m_damage;

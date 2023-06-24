@@ -5,12 +5,12 @@
 
 class Item {
 public:
-  virtual Item() = default;
-  virtual ~Item() = default;
+  virtual ~Item() {}
 
   // TODO: How should we handle failure to use an item?
-  virtual void use() = 0;
-  virtual const std::string getName() = 0;
+  virtual void use() const = 0;
+  
+  virtual const std::string getName() const = 0;
 };
 
 #endif
