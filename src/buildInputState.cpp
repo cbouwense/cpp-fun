@@ -3,13 +3,13 @@
 #include <SFML/Graphics.hpp>
 
 #include "GameState.h"
-#include "handleEvents.h"
+#include "buildInputState.h"
 
 //--------------------------------------------------------------------------------------------------
 // Public methods
 //--------------------------------------------------------------------------------------------------
 
-[[nodiscard]] InputState buildNewInputState(const InputState oldState, sf::Event event) {
+[[nodiscard]] InputState buildInputState(const InputState oldState, sf::Event event) {
   InputState newState = oldState;
 
   newState = newStateOnKeyPressed(newState, event);

@@ -2,10 +2,10 @@
 
 #include "GameState.h"
 
-#include "buildNewCollisionState.h"
-#include "handleEvents.h"
+#include "buildCollisionState.h"
+#include "buildInputState.h"
 
-TEST_CASE("buildNewInputState") {
+TEST_CASE("buildInputState") {
 
   //------------------------------------------------------------------------------------------------
   // Keyboard press
@@ -22,7 +22,7 @@ TEST_CASE("buildNewInputState") {
     rightKeyPressedEvent.type = sf::Event::KeyPressed;
     rightKeyPressedEvent.key.code = sf::Keyboard::Right;
 
-    InputState resultState = buildNewInputState(oldState, rightKeyPressedEvent);
+    InputState resultState = buildInputState(oldState, rightKeyPressedEvent);
   
     REQUIRE(resultState.isPressingRight == true);
   }
@@ -39,7 +39,7 @@ TEST_CASE("buildNewInputState") {
     leftKeyPressedEvent.type = sf::Event::KeyPressed;
     leftKeyPressedEvent.key.code = sf::Keyboard::Left;
 
-    InputState resultState = buildNewInputState(oldState, leftKeyPressedEvent);
+    InputState resultState = buildInputState(oldState, leftKeyPressedEvent);
   
     REQUIRE(resultState.isPressingLeft == true);
   }
@@ -56,7 +56,7 @@ TEST_CASE("buildNewInputState") {
     upKeyPressedEvent.type = sf::Event::KeyPressed;
     upKeyPressedEvent.key.code = sf::Keyboard::Up;
 
-    InputState resultState = buildNewInputState(oldState, upKeyPressedEvent);
+    InputState resultState = buildInputState(oldState, upKeyPressedEvent);
   
     REQUIRE(resultState.isPressingUp == true);
   }
@@ -73,7 +73,7 @@ TEST_CASE("buildNewInputState") {
     downKeyPressedEvent.type = sf::Event::KeyPressed;
     downKeyPressedEvent.key.code = sf::Keyboard::Down;
 
-    InputState resultState = buildNewInputState(oldState, downKeyPressedEvent);
+    InputState resultState = buildInputState(oldState, downKeyPressedEvent);
   
     REQUIRE(resultState.isPressingDown == true);
   }
@@ -93,7 +93,7 @@ TEST_CASE("buildNewInputState") {
     rightKeyReleasedEvent.type = sf::Event::KeyReleased;
     rightKeyReleasedEvent.key.code = sf::Keyboard::Right;
 
-    InputState resultState = buildNewInputState(oldState, rightKeyReleasedEvent);
+    InputState resultState = buildInputState(oldState, rightKeyReleasedEvent);
   
     REQUIRE(resultState.isPressingRight == false);
   }
@@ -110,7 +110,7 @@ TEST_CASE("buildNewInputState") {
     leftKeyReleasedEvent.type = sf::Event::KeyReleased;
     leftKeyReleasedEvent.key.code = sf::Keyboard::Left;
 
-    InputState resultState = buildNewInputState(oldState, leftKeyReleasedEvent);
+    InputState resultState = buildInputState(oldState, leftKeyReleasedEvent);
   
     REQUIRE(resultState.isPressingLeft == false);
   }
@@ -127,7 +127,7 @@ TEST_CASE("buildNewInputState") {
     upKeyReleasedEvent.type = sf::Event::KeyReleased;
     upKeyReleasedEvent.key.code = sf::Keyboard::Up;
 
-    InputState resultState = buildNewInputState(oldState, upKeyReleasedEvent);
+    InputState resultState = buildInputState(oldState, upKeyReleasedEvent);
   
     REQUIRE(resultState.isPressingUp == false);
   }
@@ -144,13 +144,13 @@ TEST_CASE("buildNewInputState") {
     downKeyReleasedEvent.type = sf::Event::KeyReleased;
     downKeyReleasedEvent.key.code = sf::Keyboard::Down;
 
-    InputState resultState = buildNewInputState(oldState, downKeyReleasedEvent);
+    InputState resultState = buildInputState(oldState, downKeyReleasedEvent);
   
     REQUIRE(resultState.isPressingDown == false);
   }
 }
 
-TEST_CASE("buildNewCollisionState") {
+TEST_CASE("buildCollisionState") {
   SECTION("When the rectangle is at the top left corner of the window, the resulting state should have isCollidingLeft and isCollidingTop set to true") {
     CollisionState oldState = {
       false,
@@ -165,7 +165,7 @@ TEST_CASE("buildNewCollisionState") {
     sf::RenderWindow window;
     window.create(sf::VideoMode(800, 600), "Test");
 
-    CollisionState resultState = buildNewCollisionState(oldState, rectangle, window);
+    CollisionState resultState = buildCollisionState(oldState, rectangle, window);
 
     REQUIRE(resultState.isCollidingLeft == true);
     REQUIRE(resultState.isCollidingTop == true);
@@ -185,7 +185,7 @@ TEST_CASE("buildNewCollisionState") {
     sf::RenderWindow window;
     window.create(sf::VideoMode(800, 600), "Test");
 
-    CollisionState resultState = buildNewCollisionState(oldState, rectangle, window);
+    CollisionState resultState = buildCollisionState(oldState, rectangle, window);
 
     REQUIRE(resultState.isCollidingRight == true);
     REQUIRE(resultState.isCollidingTop == true);
@@ -205,7 +205,7 @@ TEST_CASE("buildNewCollisionState") {
     sf::RenderWindow window;
     window.create(sf::VideoMode(800, 600), "Test");
 
-    CollisionState resultState = buildNewCollisionState(oldState, rectangle, window);
+    CollisionState resultState = buildCollisionState(oldState, rectangle, window);
 
     REQUIRE(resultState.isCollidingLeft == true);
     REQUIRE(resultState.isCollidingBottom == true);
@@ -225,7 +225,7 @@ TEST_CASE("buildNewCollisionState") {
     sf::RenderWindow window;
     window.create(sf::VideoMode(800, 600), "Test");
 
-    CollisionState resultState = buildNewCollisionState(oldState, rectangle, window);
+    CollisionState resultState = buildCollisionState(oldState, rectangle, window);
 
     REQUIRE(resultState.isCollidingRight == true);
     REQUIRE(resultState.isCollidingBottom == true);

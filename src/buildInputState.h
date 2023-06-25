@@ -1,5 +1,5 @@
-#ifndef HANDLEKEYBOARDEVENTS_HPP
-#define HANDLEKEYBOARDEVENTS_HPP
+#ifndef BUILD_INPUT_STATE_H
+#define BUILD_INPUT_STATE_H
 
 #include <SFML/Graphics.hpp>
 
@@ -9,7 +9,7 @@
 // Public methods
 //--------------------------------------------------------------------------------------------------
 
-[[nodiscard]] InputState buildNewInputState(const InputState oldState, sf::Event event);
+[[nodiscard]] InputState buildInputState(const InputState oldState, sf::Event event);
 
 //--------------------------------------------------------------------------------------------------
 // Private methods

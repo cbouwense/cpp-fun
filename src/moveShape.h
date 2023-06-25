@@ -1,5 +1,5 @@
-#ifndef MOVE_SHAPE_HPP
-#define MOVE_SHAPE_HPP 
+#ifndef MOVE_SHAPE_H
+#define MOVE_SHAPE_H 
 
 #include <SFML/Graphics.hpp>
 

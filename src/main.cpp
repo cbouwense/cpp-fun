@@ -2,21 +2,12 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "buildCollisionState.h"
+#include "buildInputState.h"
+#include "buildMovementState.h"
 #include "GameState.h"
-#include "handleEvents.h"
 #include "moveShape.h"
-#include "buildNewCollisionState.h"
 
-MovementState buildNewMovementState(const MovementState oldMovementState, const InputState inputState, const CollisionState collisionState) {
-  MovementState newMovementState = oldMovementState;
-
-  newMovementState.isMovingUp = inputState.isPressingUp && !collisionState.isCollidingTop;
-  newMovementState.isMovingRight = inputState.isPressingRight && !collisionState.isCollidingRight;
-  newMovementState.isMovingDown = inputState.isPressingDown && !collisionState.isCollidingBottom;
-  newMovementState.isMovingLeft = inputState.isPressingLeft && !collisionState.isCollidingLeft;
-
-  return newMovementState;
-}
 
 int main() {
   //------------------------------------------------------------------------------------------------
@@ -30,14 +21,14 @@ int main() {
   // Global game state
   //------------------------------------------------------------------------------------------------
 
-  InputState g_inputState = {
+  CollisionState g_collisionState = {
     false,
     false,
     false,
     false
   };
 
-  CollisionState g_collisionState = {
+  InputState g_inputState = {
     false,
     false,
     false,
@@ -87,9 +78,9 @@ int main() {
         g_window.close();
       }
 
-      newInputState = buildNewInputState(newInputState, event);
-      newCollisionState = buildNewCollisionState(newCollisionState, newRectangle, g_window);
-      newMovementState = buildNewMovementState(newMovementState, newInputState, newCollisionState);
+      newInputState = buildInputState(newInputState, event);
+      newCollisionState = buildCollisionState(newCollisionState, newRectangle, g_window);
+      newMovementState = buildMovementState(newMovementState, newInputState, newCollisionState);
     }
 
     //----------------------------------------------------------------------------------------------

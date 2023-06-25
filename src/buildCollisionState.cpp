@@ -1,9 +1,9 @@
 #include <SFML/Graphics.hpp>
 
 #include "GameState.h"
-#include "buildNewCollisionState.h"
+#include "buildCollisionState.h"
 
-CollisionState buildNewCollisionState(const CollisionState oldCollisionState, const sf::RectangleShape rectangle, const sf::RenderWindow& window) {
+CollisionState buildCollisionState(const CollisionState oldCollisionState, const sf::RectangleShape rectangle, const sf::RenderWindow& window) {
   const float oldWidth = rectangle.getSize().x;
   const float oldHeight = rectangle.getSize().y;
   const float windowWidth = window.getSize().x;

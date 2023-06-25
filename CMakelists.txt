@@ -14,8 +14,9 @@ set(CMAKE_BUILD_TYPE Debug)
 
 # Gather up all the source files
 set(SOURCES
-  src/buildNewCollisionState.cpp
-  src/handleEvents.cpp
+  src/buildCollisionState.cpp
+  src/buildInputState.cpp
+  src/buildMovementState.cpp
   src/moveShape.cpp
 )
 
