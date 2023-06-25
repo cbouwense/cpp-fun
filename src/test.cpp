@@ -1,6 +1,6 @@
 #include <catch2/catch_test_macros.hpp>
 
-#include "handleKeyboardEvents.h"
+#include "handleEvents.h"
 
 TEST_CASE("movementStateFromEvents") {
 

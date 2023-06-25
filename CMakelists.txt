@@ -11,7 +11,7 @@ include(FetchContent)
 
 # Gather up all the source files
 set(SOURCES
-  src/handleKeyboardEvents.cpp
+  src/handleEvents.cpp
 )
 
 #-------------------------------------------------------------------------------

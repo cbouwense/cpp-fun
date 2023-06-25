@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 
-#include "handleKeyboardEvents.h"
+#include "MovementState.h"
+#include "handleEvents.h"
 
 // TODO: It would be nice if we could actually have a pure function instead of moving the rectangle
 // in place.
