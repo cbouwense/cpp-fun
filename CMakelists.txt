@@ -30,18 +30,18 @@ FetchContent_MakeAvailable(SFML)
 # Create the main executable
 #-------------------------------------------------------------------------------
 
-# project(${MAIN_PROJECT_NAME})
+project(${MAIN_PROJECT_NAME})
 
-# add_executable(${MAIN_PROJECT_NAME}
-#   src/main.cpp
-#   ${SOURCES}
-# )
+add_executable(${MAIN_PROJECT_NAME}
+  src/main.cpp
+  ${SOURCES}
+)
 
-# target_link_libraries(${MAIN_PROJECT_NAME}
-#   sfml-graphics
-#   sfml-window
-#   sfml-system
-# )
+target_link_libraries(${MAIN_PROJECT_NAME}
+  sfml-graphics
+  sfml-window
+  sfml-system
+)
 
 #-------------------------------------------------------------------------------
 # Catch 2

@@ -2,7 +2,8 @@
 
 #include "handleKeyboardEvents.h"
 
-// It would be nice if we could actually have a pure function instead of moving the rectangle in place.
+// TODO: It would be nice if we could actually have a pure function instead of moving the rectangle
+// in place.
 void moveBasedOnMovementState(sf::RectangleShape& rectangle, const MovementState& movementState) {
   const float speed = 5.0f;
 
@@ -24,20 +25,31 @@ void moveBasedOnMovementState(sf::RectangleShape& rectangle, const MovementState
 }
 
 int main() {
+  //------------------------------------------------------------------------------------------------
+  // Window setup
+  //------------------------------------------------------------------------------------------------
+  
   sf::RenderWindow window(sf::VideoMode(1024, 1024), "SFML works!");
+  window.setFramerateLimit(60);
 
   sf::RectangleShape rectangle(sf::Vector2f(100.f, 100.f));
   rectangle.setFillColor(sf::Color::Red);
   rectangle.setPosition(100.f, 100.f);
+
+  //------------------------------------------------------------------------------------------------
+  // Global game state
+  //------------------------------------------------------------------------------------------------
 
   MovementState g_movementState = {
     false,
     false,
     false,
     false
-  };  
+  };
 
-  window.setFramerateLimit(60);
+  //------------------------------------------------------------------------------------------------
+  // Game loop
+  //------------------------------------------------------------------------------------------------
 
   while (window.isOpen()) {
     sf::Event event;
