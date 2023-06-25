@@ -3,7 +3,7 @@
 #include "handleKeyboardEvents.h"
 
 void moveBasedOnMovementState(sf::RectangleShape& rectangle, const MovementState& movementState) {
-const float speed = 0.1f;
+const float speed = 5.0f;
 
 if (movementState.isMovingRight) {
   rectangle.move(speed, 0.f);
@@ -34,9 +34,10 @@ int main() {
     false,
     false,
     false
-  };
+  };  
 
-  
+  // Set framerate limit
+  window.setFramerateLimit(60);
 
   while (window.isOpen()) {
     sf::Event event;
