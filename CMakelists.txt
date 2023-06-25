@@ -4,14 +4,18 @@ cmake_minimum_required(VERSION "3.16.1")
 # Normal stuff
 #-------------------------------------------------------------------------------
 
+include(FetchContent)
+
 set(MAIN_PROJECT_NAME "cpp-fun")
 set(TEST_PROJECT_NAME "cpp-fun-tests")
 
-include(FetchContent)
+# Set the build type to Debug
+set(CMAKE_BUILD_TYPE Debug)
 
 # Gather up all the source files
 set(SOURCES
   src/handleEvents.cpp
+  src/moveShape.cpp
 )
 
 #-------------------------------------------------------------------------------
