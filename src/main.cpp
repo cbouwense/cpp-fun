@@ -6,8 +6,7 @@
 #include "buildInputState.h"
 #include "buildMovementState.h"
 #include "GameState.h"
-#include "moveShape.h"
-
+#include "buildRectangleShape.h"
 
 int main() {
   //------------------------------------------------------------------------------------------------
@@ -16,6 +15,8 @@ int main() {
   
   sf::RenderWindow g_window(sf::VideoMode(1024, 1024), "SFML works!");
   g_window.setFramerateLimit(60);
+
+  sf::Clock g_clock;
 
   //------------------------------------------------------------------------------------------------
   // Global game state
@@ -79,23 +80,26 @@ int main() {
       }
 
       newInputState = buildInputState(newInputState, event);
-      newCollisionState = buildCollisionState(newCollisionState, newRectangle, g_window);
-      newMovementState = buildMovementState(newMovementState, newInputState, newCollisionState);
     }
+
+    // Get elapsed time
+    const float deltaTime = g_clock.restart().asSeconds();
 
     //----------------------------------------------------------------------------------------------
     // Simulate game state transformation
     //----------------------------------------------------------------------------------------------
 
-    newRectangle = moveBasedOnMovementState(newRectangle, newMovementState);
+    newCollisionState = buildCollisionState(newCollisionState, newRectangle, g_window);
+    newMovementState = buildMovementState(newMovementState, newInputState, newCollisionState);
+    newRectangle = buildRectangleShape(newRectangle, newMovementState, deltaTime);
 
     // Clear stdout
     std::cout << "\033[2J\033[1;1H";
 
     // Print out states
     std::cout << "newCollisionState: " << newCollisionState.isCollidingTop << newCollisionState.isCollidingRight  << newCollisionState.isCollidingBottom << newCollisionState.isCollidingLeft << std::endl;
-    std::cout << "newMovementState: " << newMovementState.isMovingUp << newMovementState.isMovingRight << newMovementState.isMovingDown << newMovementState.isMovingLeft << std::endl;
     std::cout << "newInputState: " << newInputState.isPressingUp << newInputState.isPressingRight << newInputState.isPressingDown << newInputState.isPressingLeft << std::endl;
+    std::cout << "newMovementState: " << newMovementState.isMovingUp << newMovementState.isMovingRight << newMovementState.isMovingDown << newMovementState.isMovingLeft << std::endl;
     std::cout << "newRectangle: " << newRectangle.getPosition().x << ", " << newRectangle.getPosition().y << std::endl;
 
     //----------------------------------------------------------------------------------------------

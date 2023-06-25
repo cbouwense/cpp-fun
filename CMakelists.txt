@@ -17,7 +17,7 @@ set(SOURCES
   src/buildCollisionState.cpp
   src/buildInputState.cpp
   src/buildMovementState.cpp
-  src/moveShape.cpp
+  src/buildRectangleShape.cpp
 )
 
 #-------------------------------------------------------------------------------
