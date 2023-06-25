@@ -1,37 +1,148 @@
 #include <catch2/catch_test_macros.hpp>
 
-#include "Character.h"
+#include "handleKeyboardEvents.h"
 
-TEST_CASE("a character created without a specific item will not start with any items") {
-  Character character = Character();
+TEST_CASE("movementStateFromEvents") {
 
-  REQUIRE(character.hasNoItems());
-}
+  //------------------------------------------------------------------------------------------------
+  // Keyboard press
+  //------------------------------------------------------------------------------------------------
+  SECTION("When the event is a keyboard press right key, the resulting state should have isMovingRight set to true") {
+    MovementState oldState = {
+      false,
+      false,
+      false,
+      false
+    };
 
-TEST_CASE("you can add an item to a character's inventory") {
-  Character characterWithOne = Character(1);
-  Character resultCharacter = characterWithOne.addItemToInventory(2);
+    sf::Event rightKeyPressedEvent;
+    rightKeyPressedEvent.type = sf::Event::KeyPressed;
+    rightKeyPressedEvent.key.code = sf::Keyboard::Right;
 
-  REQUIRE(resultCharacter.hasItem(2));
-}
+    MovementState resultState = movementStateFromEvents(oldState, rightKeyPressedEvent);
+  
+    REQUIRE(resultState.isMovingRight == true);
+  }
 
-TEST_CASE("when a character does not have the item requested to be removed then it will not change its item") {
-  Character characterWithOne = Character(1);
-  Character resultCharacter = characterWithOne.removeItemFromInventory(2);
+  SECTION("When the event is a keyboard press left key, the resulting state should have isMovingLeft set to true") {
+    MovementState oldState = {
+      false,
+      false,
+      false,
+      false
+    };
 
-  REQUIRE(resultCharacter.hasItem(1));
-}
+    sf::Event leftKeyPressedEvent;
+    leftKeyPressedEvent.type = sf::Event::KeyPressed;
+    leftKeyPressedEvent.key.code = sf::Keyboard::Left;
 
-TEST_CASE("when a character is requested to remove an item it has it will report not having it afterwards") {
-  Character characterWithOne = Character(1);
-  Character resultCharacter = characterWithOne.removeItemFromInventory(1);
+    MovementState resultState = movementStateFromEvents(oldState, leftKeyPressedEvent);
+  
+    REQUIRE(resultState.isMovingLeft == true);
+  }
 
-  REQUIRE(resultCharacter.hasItem(1) == false);
-}
+  SECTION("When the event is a keyboard press up key, the resulting state should have isMovingUp set to true") {
+    MovementState oldState = {
+      false,
+      false,
+      false,
+      false
+    };
 
-TEST_CASE("when a character is requested to remove an item it has it will report having no items afterwards") {
-  Character characterWithOne = Character(1);
-  Character resultCharacter = characterWithOne.removeItemFromInventory(1);
+    sf::Event upKeyPressedEvent;
+    upKeyPressedEvent.type = sf::Event::KeyPressed;
+    upKeyPressedEvent.key.code = sf::Keyboard::Up;
 
-  REQUIRE(resultCharacter.hasNoItems());
+    MovementState resultState = movementStateFromEvents(oldState, upKeyPressedEvent);
+  
+    REQUIRE(resultState.isMovingUp == true);
+  }
+
+  SECTION("When the event is a keyboard press down key, the resulting state should have isMovingDown set to true") {
+    MovementState oldState = {
+      false,
+      false,
+      false,
+      false
+    };
+
+    sf::Event downKeyPressedEvent;
+    downKeyPressedEvent.type = sf::Event::KeyPressed;
+    downKeyPressedEvent.key.code = sf::Keyboard::Down;
+
+    MovementState resultState = movementStateFromEvents(oldState, downKeyPressedEvent);
+  
+    REQUIRE(resultState.isMovingDown == true);
+  }
+
+  //------------------------------------------------------------------------------------------------
+  // Keyboard release
+  //------------------------------------------------------------------------------------------------
+  SECTION("When the event is a keyboard release right key, the resulting state should have isMovingRight set to false") {
+    MovementState oldState = {
+      true,
+      false,
+      false,
+      false
+    };
+
+    sf::Event rightKeyReleasedEvent;
+    rightKeyReleasedEvent.type = sf::Event::KeyReleased;
+    rightKeyReleasedEvent.key.code = sf::Keyboard::Right;
+
+    MovementState resultState = movementStateFromEvents(oldState, rightKeyReleasedEvent);
+  
+    REQUIRE(resultState.isMovingRight == false);
+  }
+
+  SECTION("When the event is a keyboard release left key, the resulting state should have isMovingLeft set to false") {
+    MovementState oldState = {
+      false,
+      true,
+      false,
+      false
+    };
+
+    sf::Event leftKeyReleasedEvent;
+    leftKeyReleasedEvent.type = sf::Event::KeyReleased;
+    leftKeyReleasedEvent.key.code = sf::Keyboard::Left;
+
+    MovementState resultState = movementStateFromEvents(oldState, leftKeyReleasedEvent);
+  
+    REQUIRE(resultState.isMovingLeft == false);
+  }
+
+  SECTION("When the event is a keyboard release up key, the resulting state should have isMovingUp set to false") {
+    MovementState oldState = {
+      false,
+      false,
+      true,
+      false
+    };
+
+    sf::Event upKeyReleasedEvent;
+    upKeyReleasedEvent.type = sf::Event::KeyReleased;
+    upKeyReleasedEvent.key.code = sf::Keyboard::Up;
+
+    MovementState resultState = movementStateFromEvents(oldState, upKeyReleasedEvent);
+  
+    REQUIRE(resultState.isMovingUp == false);
+  }
+
+  SECTION("When the event is a keyboard release down key, the resulting state should have isMovingDown set to false") {
+    MovementState oldState = {
+      false,
+      false,
+      false,
+      true
+    };
+
+    sf::Event downKeyReleasedEvent;
+    downKeyReleasedEvent.type = sf::Event::KeyReleased;
+    downKeyReleasedEvent.key.code = sf::Keyboard::Down;
+
+    MovementState resultState = movementStateFromEvents(oldState, downKeyReleasedEvent);
+  
+    REQUIRE(resultState.isMovingDown == false);
+  }
 }

@@ -2,6 +2,12 @@
 
 #include "handleKeyboardEvents.h"
 
+// TODO: Should this be some sort of static class or namespace?
+
+//--------------------------------------------------------------------------------------------------
+// Public methods
+//--------------------------------------------------------------------------------------------------
+
 [[nodiscard]] MovementState movementStateFromEvents(const MovementState& oldState, sf::Event& event) {
   MovementState newState = oldState;
 
@@ -13,6 +19,10 @@
 
   return newState;
 }
+
+//--------------------------------------------------------------------------------------------------
+// Private methods
+//--------------------------------------------------------------------------------------------------
 
 [[nodiscard]] MovementState newStateOnKeyPressed(const MovementState& oldState, const sf::Event& event) {
   MovementState newState = oldState;

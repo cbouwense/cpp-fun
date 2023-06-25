@@ -6,7 +6,8 @@
                 "build/generated-includes",
                 "${workspaceFolder}/build/_deps/catch2-src/src",
                 "${workspaceFolder}/build/_deps/sfml-src/include",
-                "${workspaceFolder}/src"
+                "${workspaceFolder}/src",
+                "${workspaceFolder}/build/_deps/catch2-src/src"
             ],
             "defines": [
                 "_DEBUG",
