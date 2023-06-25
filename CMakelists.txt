@@ -30,7 +30,7 @@ FetchContent_MakeAvailable(SFML)
 # Gather up all the source files
 set(SOURCES
   src/main.cpp
-  src/Character.cpp
+  src/handleKeyboardEvents.cpp
 )
 
 add_executable(${PROJECT_NAME}

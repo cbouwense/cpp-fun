@@ -5,7 +5,8 @@
             "includePath": [
                 "build/generated-includes",
                 "${workspaceFolder}/build/_deps/catch2-src/src",
-                "${workspaceFolder}/third-party/SFML-2.6.0/include",
+                "${workspaceFolder}/build/_deps/sfml-src/include",
+                "${workspaceFolder}/src"
             ],
             "defines": [
                 "_DEBUG",
