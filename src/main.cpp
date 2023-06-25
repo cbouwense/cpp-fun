@@ -55,21 +55,18 @@ int main() {
     //----------------------------------------------------------------------------------------------
     // Local game state
     //----------------------------------------------------------------------------------------------
-    
-    // Does creating these things fresh every frame cause some kind of bottleneck?
-    // How could I measure this?
+
     CollisionState newCollisionState = g_collisionState;
     InputState newInputState = g_inputState;
     MovementState newMovementState = g_movementState;
     sf::RectangleShape newRectangle = g_rectangle;
 
     //----------------------------------------------------------------------------------------------
-    // Handle all inputs caught during this frame
+    // Handle all inputs in queue
     //----------------------------------------------------------------------------------------------
     
     sf::Event event;
 
-    // TODO: how do I clamp this to one frame?
     while (g_window.pollEvent(event)) {
       if (event.type == sf::Event::Closed) {
         g_window.close();
@@ -82,7 +79,7 @@ int main() {
       newInputState = buildInputState(newInputState, event);
     }
 
-    // Get elapsed time
+    // Get time that has elapsed since last frame
     const float deltaTime = g_clock.restart().asSeconds();
 
     //----------------------------------------------------------------------------------------------
@@ -92,6 +89,10 @@ int main() {
     newCollisionState = buildCollisionState(newCollisionState, newRectangle, g_window);
     newMovementState = buildMovementState(newMovementState, newInputState, newCollisionState);
     newRectangle = buildRectangleShape(newRectangle, newMovementState, deltaTime);
+
+    //----------------------------------------------------------------------------------------------
+    // Debug information
+    //----------------------------------------------------------------------------------------------
 
     // Clear stdout
     std::cout << "\033[2J\033[1;1H";
