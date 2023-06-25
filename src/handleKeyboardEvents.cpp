@@ -2,7 +2,19 @@
 
 #include "handleKeyboardEvents.h"
 
-[[nodiscard]] MovementState newStateOnKeyPressed(sf::Event& event, const MovementState& oldState) {
+[[nodiscard]] MovementState movementStateFromEvents(const MovementState& oldState, sf::Event& event) {
+  MovementState newState = oldState;
+
+  //------------------------------------------------------------------------------------------------
+  // Keyboard events
+  //------------------------------------------------------------------------------------------------
+  newState = newStateOnKeyPressed(newState, event);
+  newState = newStateOnKeyReleased(newState, event);
+
+  return newState;
+}
+
+[[nodiscard]] MovementState newStateOnKeyPressed(const MovementState& oldState, const sf::Event& event) {
   MovementState newState = oldState;
   
   if (event.type != sf::Event::KeyPressed) return newState;
@@ -28,11 +40,11 @@
   return newState;
 }
 
-[[nodiscard]] MovementState newStateOnKeyReleased(sf::Event& event, const MovementState& oldState) {
+[[nodiscard]] MovementState newStateOnKeyReleased(const MovementState& oldState, const sf::Event& event) {
   MovementState newState = oldState;
 
   if (event.type != sf::Event::KeyReleased) return newState; 
-  
+
   switch (event.key.code) {
     case sf::Keyboard::Right:
       newState.isMovingRight = false;

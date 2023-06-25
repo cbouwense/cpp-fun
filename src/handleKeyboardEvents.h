@@ -5,8 +5,10 @@
 
 #include "MovementState.h"
 
-[[nodiscard]] MovementState newStateOnKeyPressed(sf::Event& event, const MovementState& state);
+[[nodiscard]] MovementState movementStateFromEvents(const MovementState& oldState, sf::Event& event);
 
-[[nodiscard]] MovementState newStateOnKeyReleased(sf::Event& event, const MovementState& state);
+[[nodiscard]] MovementState newStateOnKeyPressed(const MovementState& oldState, const sf::Event& event);
+
+[[nodiscard]] MovementState newStateOnKeyReleased(const MovementState& oldState, const sf::Event& event);
 
 #endif

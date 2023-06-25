@@ -42,6 +42,7 @@ int main() {
   while (window.isOpen()) {
     sf::Event event;
 
+    // Local movement state that will be constructed based on events.
     MovementState newMovementState = g_movementState;
 
     //----------------------------------------------------------------------------------------------
@@ -57,10 +58,7 @@ int main() {
         window.close();
       }
 
-      MovementState afterKeyPressed = newStateOnKeyPressed(event, newMovementState);
-      MovementState afterKeyReleased = newStateOnKeyReleased(event, afterKeyPressed);
-
-      newMovementState = afterKeyReleased;
+      newMovementState = movementStateFromEvents(newMovementState, event);
     }
 
     //----------------------------------------------------------------------------------------------
@@ -70,17 +68,18 @@ int main() {
     moveBasedOnMovementState(rectangle, newMovementState);
 
     //----------------------------------------------------------------------------------------------
+    // Draw
+    //----------------------------------------------------------------------------------------------
+    
+    window.clear();
+    window.draw(rectangle);
+    window.display();
+
+    //----------------------------------------------------------------------------------------------
     // Mutate global game state
     //----------------------------------------------------------------------------------------------
 
     g_movementState = newMovementState;
-
-    //----------------------------------------------------------------------------------------------
-    // Draw
-    //----------------------------------------------------------------------------------------------
-    window.clear();
-    window.draw(rectangle);
-    window.display();
   }
 
   return 0;
