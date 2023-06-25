@@ -2,24 +2,25 @@
 
 #include "handleKeyboardEvents.h"
 
+// It would be nice if we could actually have a pure function instead of moving the rectangle in place.
 void moveBasedOnMovementState(sf::RectangleShape& rectangle, const MovementState& movementState) {
-const float speed = 5.0f;
+  const float speed = 5.0f;
 
-if (movementState.isMovingRight) {
-  rectangle.move(speed, 0.f);
-}
+  if (movementState.isMovingRight) {
+    rectangle.move(speed, 0.f);
+  }
 
-if (movementState.isMovingLeft) {
-  rectangle.move(-speed, 0.f);
-}
+  if (movementState.isMovingLeft) {
+    rectangle.move(-speed, 0.f);
+  }
 
-if (movementState.isMovingUp) {
-  rectangle.move(0.f, -speed);
-}
+  if (movementState.isMovingUp) {
+    rectangle.move(0.f, -speed);
+  }
 
-if (movementState.isMovingDown) {
-  rectangle.move(0.f, speed);
-}
+  if (movementState.isMovingDown) {
+    rectangle.move(0.f, speed);
+  }
 }
 
 int main() {
@@ -29,18 +30,24 @@ int main() {
   rectangle.setFillColor(sf::Color::Red);
   rectangle.setPosition(100.f, 100.f);
 
-  MovementState movementState = {
+  MovementState g_movementState = {
     false,
     false,
     false,
     false
   };  
 
-  // Set framerate limit
   window.setFramerateLimit(60);
 
   while (window.isOpen()) {
     sf::Event event;
+
+    MovementState newMovementState = g_movementState;
+
+    //----------------------------------------------------------------------------------------------
+    // Handle all inputs caught during this frame
+    //----------------------------------------------------------------------------------------------
+    
     while (window.pollEvent(event)) {
       if (event.type == sf::Event::Closed) {
         window.close();
@@ -50,12 +57,27 @@ int main() {
         window.close();
       }
 
-      movementState = newStateOnKeyPressed(event, movementState);
-      movementState = newStateOnKeyReleased(event, movementState);
+      MovementState afterKeyPressed = newStateOnKeyPressed(event, newMovementState);
+      MovementState afterKeyReleased = newStateOnKeyReleased(event, afterKeyPressed);
+
+      newMovementState = afterKeyReleased;
     }
 
-    moveBasedOnMovementState(rectangle, movementState);
+    //----------------------------------------------------------------------------------------------
+    // Simulate game state
+    //----------------------------------------------------------------------------------------------
 
+    moveBasedOnMovementState(rectangle, newMovementState);
+
+    //----------------------------------------------------------------------------------------------
+    // Mutate global game state
+    //----------------------------------------------------------------------------------------------
+
+    g_movementState = newMovementState;
+
+    //----------------------------------------------------------------------------------------------
+    // Draw
+    //----------------------------------------------------------------------------------------------
     window.clear();
     window.draw(rectangle);
     window.display();
