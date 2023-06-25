@@ -1,19 +1,17 @@
 #include <iostream>
 
-#include "handleEvents.h"
+#include <SFML/Graphics.hpp>
 
-// TODO: Should this be some sort of static class or namespace?
+#include "GameState.h"
+#include "handleEvents.h"
 
 //--------------------------------------------------------------------------------------------------
 // Public methods
 //--------------------------------------------------------------------------------------------------
 
-[[nodiscard]] MovementState movementStateFromEvents(const MovementState& oldState, sf::Event& event) {
-  MovementState newState = oldState;
+[[nodiscard]] InputState buildNewInputState(const InputState oldState, sf::Event event) {
+  InputState newState = oldState;
 
-  //------------------------------------------------------------------------------------------------
-  // Keyboard events
-  //------------------------------------------------------------------------------------------------
   newState = newStateOnKeyPressed(newState, event);
   newState = newStateOnKeyReleased(newState, event);
 
@@ -24,55 +22,54 @@
 // Private methods
 //--------------------------------------------------------------------------------------------------
 
-[[nodiscard]] MovementState newStateOnKeyPressed(const MovementState& oldState, const sf::Event& event) {
-  MovementState newState = oldState;
+[[nodiscard]] InputState newStateOnKeyPressed(const InputState oldState, const sf::Event event) {
+  InputState newState = oldState;
   
   if (event.type != sf::Event::KeyPressed) return newState;
 
   switch (event.key.code) {
     case sf::Keyboard::Right:
-      newState.isMovingRight = true;
+      newState.isPressingRight = true;
       break;
 
     case sf::Keyboard::Left:
-      newState.isMovingLeft = true;
+      newState.isPressingLeft = true;
       break;
 
     case sf::Keyboard::Up:
-      newState.isMovingUp = true;
+      newState.isPressingUp = true;
       break;
 
     case sf::Keyboard::Down:
-      newState.isMovingDown = true;
+      newState.isPressingDown = true;
       break;
   }
 
   return newState;
 }
 
-[[nodiscard]] MovementState newStateOnKeyReleased(const MovementState& oldState, const sf::Event& event) {
-  MovementState newState = oldState;
+[[nodiscard]] InputState newStateOnKeyReleased(const InputState oldState, const sf::Event event) {
+  InputState newState = oldState;
 
   if (event.type != sf::Event::KeyReleased) return newState; 
 
   switch (event.key.code) {
     case sf::Keyboard::Right:
-      newState.isMovingRight = false;
+      newState.isPressingRight = false;
       break;
 
     case sf::Keyboard::Left:
-      newState.isMovingLeft = false;
+      newState.isPressingLeft = false;
       break;
 
     case sf::Keyboard::Up:
-      newState.isMovingUp = false;
+      newState.isPressingUp = false;
       break;
 
     case sf::Keyboard::Down:
-      newState.isMovingDown = false;
+      newState.isPressingDown = false;
       break;
   }
-
 
   return newState;
 }

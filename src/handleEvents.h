@@ -3,12 +3,20 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "MovementState.h"
+#include "GameState.h"
 
-[[nodiscard]] MovementState movementStateFromEvents(const MovementState& oldState, sf::Event& event);
+//--------------------------------------------------------------------------------------------------
+// Public methods
+//--------------------------------------------------------------------------------------------------
 
-[[nodiscard]] MovementState newStateOnKeyPressed(const MovementState& oldState, const sf::Event& event);
+[[nodiscard]] InputState buildNewInputState(const InputState oldState, sf::Event event);
 
-[[nodiscard]] MovementState newStateOnKeyReleased(const MovementState& oldState, const sf::Event& event);
+//--------------------------------------------------------------------------------------------------
+// Private methods
+//--------------------------------------------------------------------------------------------------
+
+[[nodiscard]] InputState newStateOnKeyPressed(const InputState oldState, const sf::Event event);
+
+[[nodiscard]] InputState newStateOnKeyReleased(const InputState oldState, const sf::Event event);
 
 #endif

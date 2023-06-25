@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "MovementState.h"
+#include "GameState.h"
 
 sf::RectangleShape moveBasedOnMovementState(sf::RectangleShape rectangle, const MovementState movementState);
 
